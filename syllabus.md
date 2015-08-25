@@ -3,12 +3,17 @@
 Schedule: T/Th, 4-6:40PM, Room B510, ADS Building  
 
 Professor: Visiting Artist **David Rueter** (netid: darueter)  
+<http://davidrueter.com>  
+
 Teaching Practicum Graduate Student: **Caleb Foss**
 
 Office hours are by appointment only.
 
-New Media Lab Specialist: **Brett Balogh** (netid bbalogh)
+New Media Lab Specialist: **Brett Balogh** (netid bbalogh)  
+<http://www.brettbalogh.com>
 
+Class blog: <http://introtonma.wordpress.com>  
+Github page: <https://github.com/davruet/introToNMA/>
 
 ##Class description
 
@@ -28,9 +33,11 @@ Students will learn how:
 * to apply basic techniques from the fields of electronics and programming to artmaking
 * to make art that critically engages relevant art history and contemporary technological, political, economic, cultural, and artistic contexts
 
+
+
 ##Class Structure
 
-The class will consist of a series of short lectures, class discussions, and workshops that explore technical, art-historical, and theoretical topics that are vital to understanding contemporary new media art and its possible future directions. 
+The class will consist of a series of short lectures, class discussions, and workshops that explore technical, art-historical, and theoretical topics that are vital to understanding contemporary new media art and its possible future directions.
 
 Students will read key texts, discuss, build things, and look at a lot of art. 
 
@@ -42,13 +49,20 @@ Assigned readings will focus on primary texts written by influential artists, cu
 
 ###Suggested Reading
 
-* *Art and Electronic Media*, Edward A Shanken
+* *Art and Electronic Media*, Edward A Shanken (not required but worth buying!)
 * *Getting Started with Arduino*, Massimo Banzi
 * *Rethinking Curating: Art after New Media*, Graham, Beryl and Cook, Sarah
 * *New Media in the White Cube and Beyond*, ed. Christiane Paul <http://atc.berkeley.edu/201/readings/Christiane_Paul_Reading.pdf>
 * *Defining New Media Art*, Mark Tribe <http://atc.berkeley.edu/201/readings/TribeNMA.pdf>
 * *Media Art: Towards a New Definition of arts in the Age of Technology*, ed. Valentino Catricalà <https://www.academia.edu/11185472/Media_Art._Towards_a_New_Definition_of_Arts_in_the_Age_of_Technology>
 
+####Technical Resources
+* Arduino: <https://www.arduino.cc/en/Tutorial/> - Official Arduino site and host of reference matierials and tutorials.
+* New Media Artist: <http://newmediaartist.org/> - Free reference book on electronics and new media art. Lots of info on electronics in chapters 3,4, and 5.
+* Circuit.js circuit simulator: <http://lushprojects.com/circuitjs/> - Simulate and visualize what's happening in almost any circuit. 	
+* Adafruit: <http://adafruit.com> - online store and tutorials
+* Sparkfun: <http://sparkfun.com> - same
+* Github: <http://github.com> - repository of open source code. Search for "arduino" to find examples and libraries you can use.
 
 
 ###Conferences and Festivals
@@ -90,7 +104,7 @@ Extra credit may be given (at the instructor's discretion) for work that demonst
 
 * Work to make sure that critiques and discussions are helpful, inclusive spaces where everyone's voice can be heard. 
 
-* Contribute to the class blog: http://tumblr.com/
+* Contribute to the class blog: <http://introToNMA.wordpress.com>
 
 ##Attendance
 
@@ -136,6 +150,8 @@ Projects created in this course may be used by the Department for purposes of pr
 ##Changes
 
 This syllabus is provisional. Topics, dates, and schedules may change depending on the needs of the class. Project due dates, required readings, and graded assignment descriptions will not be changed without appropriate notification in class.
+
+The latest syllabus will always be available on the class github page: <https://github.com/davruet/introToNMA/blob/master/syllabus.md>
 
 
 
