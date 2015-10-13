@@ -271,10 +271,12 @@ boolean dropRequest(){
 }
 
 void handleNotFound() {
-  if (server.method() == HTTP_OTHER){
+  
+  /*if (server.method() == HTTP_OTHER){
     server.client().stop();
     return;
-  }
+  }*/
+  
   if (dropRequest()){
     DEBUG_SERIAL.println("Request dropped.");
     server.sendHeader("Location", "http://192.168.1.5");
