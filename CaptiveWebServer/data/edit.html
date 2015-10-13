@@ -1,0 +1,195 @@
+<html>
+<head><title>Edit</title>
+<style type="text/css">
+	.errorMessage {
+		color:red;
+	}
+</style>
+<script type="text/javascript">
+
+var req = null;
+var progress = null;
+var progressDiv = null;
+
+function createFileTree(parent, path){
+	httpListDir(parent, path);
+}
+
+function showProgressBar(){
+	progress = document.createElement("progress");
+	progressDiv.appendChild(progress);
+}
+
+function hideProgressBar(){
+	while (progressDiv.firstChild) progressDiv.removeChild(progressDiv.firstChild);
+}
+
+function setIndeterinateProgress(){
+	progress.max = 100;
+	progress.removeAttribute("value");
+}
+
+function setProgress(current, max){
+	progress.setAttribute("max", max);
+	progress.setAttribute("value", current);
+}
+
+function httpListDir(parent, path){
+
+	var spinner = document.createElement("img");
+	spinner.setAttribute("src", "spinner.gif");
+	parent.appendChild(spinner);
+
+	req = new XMLHttpRequest(parent, path);
+	req.onreadystatechange = getCallback(parent, path);
+	req.open("GET", "/list?dir="+path, true);
+	req.send(null);
+}
+
+ function httpDelete(filename, callback){
+ 	console.log("Deleting " + filename);
+      req = new XMLHttpRequest();
+      req.onreadystatechange = function(){
+      	if (req.readyState == 4){
+          if(req.status == 200){
+          	callback(filename);
+          }
+      	}
+      };
+      var formData = new FormData();
+      formData.append("path", filename);
+      req.open("DELETE", "/edit");
+      req.send(formData);
+    }
+
+function addFileList(parent, path, data){
+	var ul = document.createElement("ul");
+	parent.appendChild(ul);
+	var files = data.files;
+	for (var i = 0; i < files.length; i++){
+		var node = files[i];
+		ul.appendChild(createLeaf(path, node));
+	}
+
+	var spaceDiv = document.createElement("div");
+	spaceDiv.innerHTML = "Free space: " + (data.flashSize - data.usedSize);
+	parent.appendChild(spaceDiv);
+}
+
+function addFileListError(parent, path, data){
+	var errorDiv = document.createElement("div");
+	errorDiv.setAttribute("class", "errorMessage");
+	errorDiv.innerHTML = data + "<br>Refresh this page to try again.";
+	parent.appendChild(errorDiv);
+}
+
+function createLeaf(path, node){
+	var li = document.createElement("li");
+	li.id = node.path;
+	var span = document.createElement("span");
+	span.textContent = node.path;
+	var deleteBtn = document.createElement("img");
+	deleteBtn.setAttribute("src", "trash-sm.png");
+	deleteBtn.onclick = function(e){
+		httpDelete(node.path, function(filename){
+			refreshTree();
+		});
+	}
+	li.appendChild(span);
+	li.appendChild(deleteBtn);
+	return li;
+}
+
+function refreshTree(){
+	var root = getTreeRoot();
+	showProgressBar();
+	setIndeterinateProgress();
+	root.removeChild(root.childNodes[0]);
+	root.removeChild(root.childNodes[0]);
+	httpListDir(root, "/");
+}
+
+function getTreeRoot(){
+	return document.getElementById("fileTree");
+}
+
+function getCallback(parent, path){
+  return function(){
+    if (req.readyState == 4){
+      if(req.status == 200){
+      	console.log("Received Req");
+		addFileList(parent, path, JSON.parse(req.responseText));
+	  } else if (req.status = 403){
+	  	addFileListError(parent, path, req.responseText);
+	  }
+	  parent.removeChild(parent.childNodes[0]); // Remove spinner
+    }
+    hideProgressBar();
+  }
+}
+
+function upload(){
+	var input = document.getElementById("fileInput");
+	 if(input.files.length === 0){
+	    return;
+	  }
+	  req = new XMLHttpRequest();
+	  req.onreadystatechange = function(){
+	  	  if (req.readyState == 4){
+            if(req.status == 200) {
+            	refreshTree();
+            } else {
+            	alert("Error uploading: " + req.statusText);
+            }
+            hideProgressBar();
+          } 
+	  };
+	  req.upload.onprogress = function(e){
+	  	console.log("progress:", e);
+	  	setProgress(e.loaded, e.total);
+	  };
+
+	  var formData = new FormData();
+	  formData.append("data", input.files[0], "/" + input.files[0].name);
+	  showProgressBar();
+	  req.open("POST", "/edit");
+	  req.send(formData);
+}
+
+function setSSID(){
+	var ssidInput = document.getElementById("ssidInput");
+	req = new XMLHttpRequest();
+	  req.onreadystatechange = function(){
+	  	  if (req.readyState == 4){
+            if(req.status == 200) alert("SSID successfully changed. You must now connect to the new SSID.");
+          } else {
+          	console.log("Request error: " + req.statusText);
+          }
+	  };
+	req.open("GET", "setSSID?ssid=" + ssidInput.value);
+	req.send(null);
+}
+
+function onBodyLoad(){
+	progressDiv = document.getElementById("progressDiv");
+
+	createFileTree(getTreeRoot(), "/");	
+	document.getElementById("uploadBtn").onclick=upload;
+	document.getElementById("setSSIDBtn").onclick=setSSID;
+}
+
+</script>
+</head>
+<body onload="onBodyLoad();">
+<div id="uploader">
+<input id="fileInput" type="file" name="data"/>
+<button id="uploadBtn">Upload</button>
+</div>
+<div id="progressDiv"></div>
+<div id="setSSID">
+<button id="setSSIDBtn" type="button">Change SSID</button>
+
+<input id="ssidInput" type="text" name="ssid"/>
+<div id="fileTree"></div>
+</body>
+</html>
