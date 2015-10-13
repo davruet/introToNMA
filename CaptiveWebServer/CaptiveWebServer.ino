@@ -1,9 +1,8 @@
-#include <DNSServer.h>
-
 /*
  * Captive portal, rudimentary web content management system.
  * 
 */
+#include <DNSServer.h>
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
@@ -370,6 +369,19 @@ void handleSetSSID(){
    
 }
 
+void gpio0(){
+  if (!editMode) DEBUG_SERIAL.println("Enabled edit mode."); // only print this once, mind the bounces
+  editMode = true; 
+}
+
+bool requestAccess(){
+  if (editMode) return true;
+  else {
+    server.send(403, "text/plain", "Access Denied: updates to server are not enabled. Connect GPIO0 pin to ground to enable.");
+    return false;
+  }
+}
+
 void startAP(){
    String ssid = WiFi.SSID();
    if (!ssid){
@@ -382,6 +394,8 @@ void startAP(){
    }
    WiFi.softAP(ssid.c_str());
 }
+
+
 
 void initAP(){
   WiFi.mode(WIFI_AP);
@@ -446,19 +460,6 @@ void setup(void){
   DEBUG_SERIAL.println("HTTP server started");
 
   ESP.wdtEnable(WATCHDOG_TIME);
-}
-
-void gpio0(){
-  if (!editMode) DEBUG_SERIAL.println("Enabled edit mode."); // only print this once, mind the bounces
-  editMode = true; 
-}
-
-bool requestAccess(){
-  if (editMode) return true;
-  else {
-    server.send(403, "text/plain", "Access Denied: updates to server are not enabled. Connect GPIO0 pin to ground to enable.");
-    return false;
-  }
 }
 
 void loop(void){
