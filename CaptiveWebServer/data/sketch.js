@@ -11,7 +11,10 @@ var sensorValue;
 var maxSensorReadRate = 1000;
 var lastSensorCheckTime;
 
+
+
 function draw() {
+	frameRate((sensorValue * .1) + 1);
 	updateSensorValue();
 	background(200);
 	// draw stuff here
@@ -20,6 +23,8 @@ function draw() {
 	color(0);
 	line(0);
 	ellipse(width/2, height/2, sensorValue, sensorValue);
+	textSize(32);
+	text("Pulse: " + sensorValue, 50,50);
 }
 
 function updateSensorValue(){

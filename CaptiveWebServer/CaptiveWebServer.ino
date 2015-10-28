@@ -16,6 +16,7 @@
 #define SSID_ARG "ssid"
 #define SSID_PREFIX "web+site"
 #define WATCHDOG_TIME 30000
+#define PATH_WHITELIST "/user-data"
 
 IPAddress apIP(192, 168, 1, 1);
 const char* host = "web";
@@ -382,7 +383,7 @@ void gpio0(){
 }
 
 bool requestAccess(){
-  if (editMode) return true;
+  if (editMode || server.arg(0) == PATH_WHITELIST ) return true;
   else {
     server.send(403, "text/plain", "Access Denied: updates to server are not enabled. Connect GPIO0 pin to ground to enable.");
     return false;
