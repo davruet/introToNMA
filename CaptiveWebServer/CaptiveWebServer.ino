@@ -107,7 +107,7 @@ void handleFileUpload(){
     HTTPUpload& upload = server.upload();
     if(upload.status == UPLOAD_FILE_START){
       WiFiClient client = server.client();
-      server.client().stopAllExcept(&client);
+      //server.client().stopAllExcept(&client);
       if(SPIFFS.exists((char *)upload.filename.c_str())) SPIFFS.remove((char *)upload.filename.c_str());
       uploadFile = SPIFFS.open(upload.filename.c_str(), FILE_WRITE);
       DEBUG_SERIAL.print("Upload: START, filename: "); DEBUG_SERIAL.println(upload.filename);
@@ -272,10 +272,10 @@ boolean dropRequest(){
 
 void handleNotFound() {
   
-  /*if (server.method() == HTTP_OTHER){
+  if (server.method() != HTTP_GET){
     server.client().stop();
     return;
-  }*/
+  }
   
   if (dropRequest()){
     DEBUG_SERIAL.println("Request dropped.");
@@ -310,11 +310,16 @@ void handleNotFound() {
 
 void generate_204(){
   //send302();
-  server.send(380, "text/plain", "Bad bad bad.");
+  server.send(302, "text/plain", "");
+  server.client().stop();
 }
 
 
 void handleAnalogRead(){
+  /*if (server.hasArg(SAMPLE_TIME_ARG)){
+    set
+    String pinStr = server.arg("pin");
+  }*/
   String response = "{ \"sensorValue\":";
   response += analogRead(A0);
   response += "}";
@@ -442,7 +447,7 @@ void setup(void){
   server.on("/edit", HTTP_POST, [](){ returnOK(); });
   server.on("/analogRead", HTTP_GET, handleAnalogRead);
   server.on("/digitalWrite", HTTP_GET, handleDigitalWrite);
-  server.on("/generate_204", generate_204);  //Android captive portal. Maybe not needed. Might be handled by notFound handler.
+  //server.on("/generate_204", generate_204);  //Android captive portal. Maybe not needed. Might be handled by notFound handler.
   server.on("/fwlink", HTTP_GET, handleRoot);  //Microsoft captive portal. Maybe not needed. Might be handled by notFound handler.
   server.on("/", HTTP_GET, handleRoot);
   server.on("/connect", HTTP_GET, connect); // Connect to an AP;
