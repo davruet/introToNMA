@@ -1,4 +1,8 @@
-Projection Mapping Workshop
+#Projection Mapping Workshop
+
+Instructor: David Rueter  
+Visiting Assistant Professor, New Media Arts, UIC  
+netid: darueter
 
 ## Projectors
 
