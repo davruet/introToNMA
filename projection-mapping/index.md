@@ -30,7 +30,7 @@ Tour of projectors, how to use them.
 * [Dynamapper](http://dynamapper.net/)
 * [MapMap](http://mapmap.info/tiki-index.php)
 * [Mapamok](https://github.com/YCAMInterlab/ProCamToolkit/wiki/mapamok-(English\))
-* [VMAP](https://github.com/AlanChatham/VMap/releases) (Free, cross-platform, Processing. I made a [sample sketch that works with Syphon]().)
+* [VMAP](https://github.com/AlanChatham/VMap/releases) (Free, cross-platform, Processing. I made a [sample sketch that works with Syphon](SyphonVMAP.pde).)
 
 
 ### References
@@ -81,11 +81,11 @@ Size your sketch to match the aspect ratio of the surface you're projecting onto
 http://syphon.v002.info/
 
 Syphoner - After effects comps live in MadMapper/VPT
-AESyphon: http://tobiasebsen.dk/experiments/aesyphon/
+[AESyphon](http://tobiasebsen.dk/experiments/aesyphon/)
 
 Syphon library for Processing - install via Import Library -> Add Library
 
-OpenFrameworks: ofxSyphon: https://github.com/astellato/ofxSyphon
+OpenFrameworks: [ofxSyphon](https://github.com/astellato/ofxSyphon)
 
 #### Windows version - Spout
 
