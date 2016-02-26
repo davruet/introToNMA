@@ -78,8 +78,6 @@ http://www.devharlan.com/doku.php
 
 
 
-
-
 #### VideoProjectionTool (VPT):
 https://hcgilje.wordpress.com/vpt/
 
@@ -93,17 +91,23 @@ Size your sketch to match the aspect ratio of the surface you're projecting onto
 
 ### Syphon
 
+Clients / Server approach to sharing video streams on OSX. (Local machine only, not networkable)
+
 http://syphon.v002.info/
 
-Syphoner - After effects comps live in MadMapper/VPT
-AESyphon: http://tobiasebsen.dk/experiments/aesyphon/
+[Syphoner](http://www.sigmasix.ch/syphoner/) - an app that streams any OSX app window to Syphon
+
+After effects comps live in MadMapper/VPT
+[AESyphon](http://tobiasebsen.dk/experiments/aesyphon/)
 
 Syphon library for Processing - install via Import Library -> Add Library
 
-OpenFrameworks: ofxSyphon: https://github.com/astellato/ofxSyphon
+OpenFrameworks: [ofxSyphon](https://github.com/astellato/ofxSyphon)
 
 #### Windows version - Spout
 
 ### Other tools
 https://github.com/shiffman/Most-Pixels-Ever-Processing - Most Pixels Ever
+
+
 
