@@ -16,8 +16,8 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  //Serial.println(signalValue);
-  Serial.println(BPM);
+  Serial.println(signalValue);
+  //Serial.println(BPM);
   delay(10);
 }
 
